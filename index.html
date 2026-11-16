@@ -3,76 +3,149 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#101114">
+  <meta name="theme-color" content="#0c0c0f">
   <meta name="description" content="Tu espacio personal para construir hábitos y seguir tu progreso.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
   <title>Habit — Seguimiento personal</title>
   <style>
-    :root{color-scheme:dark;--bg:#101114;--panel:#17191e;--panel2:#1d2027;--line:#292d36;--muted:#9299a7;--text:#f4f5f7;--accent:#b9f27c;--accent2:#d8ffad;--danger:#ff8585;--radius:18px}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-    .shell{max-width:1100px;margin:auto;padding:28px 22px 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px}
-    .brand{display:flex;align-items:center;gap:11px}.mark{width:38px;height:38px;border-radius:13px;background:var(--accent);display:grid;place-items:center;color:#111;font-weight:900;font-size:20px}.brand h1{font-size:19px;margin:0;letter-spacing:-.5px}.brand p{margin:1px 0 0;color:var(--muted);font-size:12px}
-    .date{color:var(--muted);font-size:13px;text-align:right}.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}.eyebrow{color:var(--accent);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}.hero h2{font-size:clamp(28px,5vw,40px);line-height:1.08;letter-spacing:-1.5px;margin:8px 0}.hero p{margin:0;color:var(--muted)}
-    .progress-card{min-width:190px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px}.progress-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}.progress-head strong{color:var(--text);font-size:16px}.bar{height:6px;background:#30343d;border-radius:99px;overflow:hidden;margin-top:12px}.bar>span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .25s}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:25px}.stat{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat small{color:var(--muted);display:block;margin-bottom:7px}.stat strong{font-size:23px;letter-spacing:-.8px}.stat span{color:var(--muted);font-size:12px;margin-left:5px}
-    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 13px}.section-head h3{font-size:17px;margin:0;letter-spacing:-.3px}.muted{color:var(--muted)}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:10px 14px;font-weight:650}.btn.primary{background:var(--accent);border-color:var(--accent);color:#151910}.btn.small{padding:7px 10px;font-size:12px}.filters{display:flex;gap:7px;overflow:auto;padding-bottom:4px}.chip{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;padding:7px 12px;white-space:nowrap;font-size:12px}.chip.active{background:#293321;color:var(--accent2);border-color:#465b32}
-    .habit-list{display:grid;gap:9px}.habit{display:flex;align-items:center;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}.habit.done{border-color:#3c5130;background:#181e17}.emoji{width:42px;height:42px;border-radius:13px;background:var(--panel2);display:grid;place-items:center;font-size:20px;flex:none}.habit-main{min-width:0;flex:1}.habit-name{font-weight:700;letter-spacing:-.2px}.habit-meta{font-size:12px;color:var(--muted);margin-top:3px}.streak{font-size:12px;color:var(--muted);white-space:nowrap}.check{width:34px;height:34px;border-radius:11px;border:1px solid #454b56;background:transparent;color:transparent;font-size:18px;display:grid;place-items:center;flex:none}.done .check{background:var(--accent);border-color:var(--accent);color:#141810}.empty{border:1px dashed #3a3e48;border-radius:16px;padding:28px;text-align:center;color:var(--muted)}
-    .lower{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:27px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px}.panel h3{font-size:15px;margin:0 0 14px}.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{text-align:center;color:var(--muted);font-size:11px}.dot{height:30px;width:30px;margin:7px auto 0;border-radius:10px;background:var(--panel2);display:grid;place-items:center;color:var(--muted);font-size:11px}.dot.today{outline:1px solid var(--accent);color:var(--accent)}.dot.full{background:var(--accent);color:#151910;font-weight:800}.category-row{display:flex;justify-content:space-between;gap:10px;margin:12px 0;font-size:12px}.category-row span:last-child{color:var(--muted)}.cat-track{height:5px;border-radius:99px;background:#30343d;margin-top:6px;overflow:hidden}.cat-track i{display:block;height:100%;background:var(--accent);border-radius:99px}
-    dialog{border:1px solid var(--line);border-radius:20px;background:#191b21;color:var(--text);width:min(440px,calc(100% - 28px));padding:22px;box-shadow:0 24px 90px #0009}dialog::backdrop{background:#000a;backdrop-filter:blur(4px)}.form-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.form-head h3{margin:0}.x{border:0;background:transparent;color:var(--muted);font-size:24px}.field{display:grid;gap:6px;margin:13px 0}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;border:1px solid var(--line);background:#111318;color:var(--text);border-radius:11px;padding:11px 12px}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#e1ffbd;color:#17200f;padding:10px 15px;border-radius:12px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}
-    .day-picks label{display:flex;align-items:center;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:11px;color:var(--muted)}.day-picks input{accent-color:var(--accent)}
-    .calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.cal-head{text-align:center;color:var(--muted);font-size:10px;padding:5px 0}.cal-day{min-height:42px;border:1px solid transparent;border-radius:10px;background:var(--panel2);color:var(--text);font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.cal-day.blank{background:transparent}.cal-day.selected{border-color:var(--accent);color:var(--accent)}.cal-day.today{font-weight:800}.cal-day .mini{width:5px;height:5px;border-radius:50%;background:var(--accent)}.backup-actions{display:grid;gap:9px}.backup-actions .btn{width:100%}footer{margin-top:28px;text-align:center;color:#666d79;font-size:11px}
-    @media(max-width:680px){.shell{padding:20px 15px 50px}.hero{align-items:stretch;flex-direction:column}.progress-card{min-width:0}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:20px}.lower{grid-template-columns:1fr}.streak{display:none}.top{margin-bottom:24px}}
-    .habit.off{opacity:.6}.habit-meta .tag{color:var(--accent2)}
-    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.summary div{background:var(--panel2);border-radius:12px;padding:10px 12px}.summary small{display:block;color:var(--muted);font-size:11px}.summary strong{font-size:18px;letter-spacing:-.4px}.summary em{font-style:normal;font-size:11px;margin-left:4px}.up{color:var(--accent)}.down{color:var(--danger)}
-    .chart{display:flex;align-items:flex-end;gap:3px;height:132px;border-bottom:1px solid var(--line);background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 50%;background-repeat:repeat-y}.chart button{flex:1;min-width:0;height:100%;border:0;background:transparent;padding:0;display:flex;align-items:flex-end;border-radius:4px}.chart i{display:block;width:100%;background:var(--accent);border-radius:4px 4px 2px 2px;min-height:3px}.chart i.none{background:#30343d}.chart button.sel i{background:var(--accent2);box-shadow:0 0 0 2px #d8ffad55}.chart-axis{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:7px}.chart-info{color:var(--muted);font-size:12px;margin-top:10px;min-height:18px}
-    .mh-row{display:flex;justify-content:space-between;gap:10px;margin:12px 0;font-size:12px}.mh-row span:last-child{color:var(--muted);white-space:nowrap}
-    .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:14px 0;font-size:13px}.row input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px}.row input[type=time]{border:1px solid var(--line);background:#111318;color:var(--text);border-radius:11px;padding:8px 10px;color-scheme:dark}.status{font-size:12px;padding:10px 12px;border-radius:12px;background:var(--panel2);color:var(--muted)}.status.ok{color:var(--accent2)}
-    @media(max-width:680px){.hab-head{flex-direction:column;align-items:stretch}.hab-head>div{width:100%}.hab-head .btn{flex:1;white-space:nowrap}.chart{gap:2px}.summary strong{font-size:16px}}
+    /* Negro cálido, dorado como único acento, títulos en serif, datos en sans con cifras tabulares. */
+    :root{color-scheme:dark;--bg:#0c0c0f;--panel:#141418;--panel2:#1b1b21;--line:#2a2a32;--muted:#9b98a6;--text:#f4f1ea;--gold:#e2b04a;--gold2:#f2d388;--golddim:#3a301a;--ink:#17130a;--danger:#ff8b8b;--radius:18px;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Noto Serif",serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+    *{box-sizing:border-box}[hidden]{display:none!important}
+    html{-webkit-tap-highlight-color:transparent}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 var(--sans);font-variant-numeric:tabular-nums}
+    button,input,select{font:inherit}button{cursor:pointer;color:inherit}
+    button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    .app{max-width:760px;margin:auto;padding:max(20px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) calc(96px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));background:radial-gradient(520px 260px at 88% -40px,#e2b04a14,transparent)}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:26px}
+    .brand{display:flex;align-items:center;gap:12px}.mark{width:40px;height:40px;flex:none;display:block}
+    .brand h1{font:700 21px/1 var(--serif);margin:0;letter-spacing:.2px}.brand p{margin:4px 0 0;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+    .date{color:var(--muted);font-size:12px;text-align:right;max-width:46%}.date::first-letter,.month-title::first-letter{text-transform:uppercase}
+    .eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+    .quote{font:italic 400 clamp(22px,6vw,30px)/1.22 var(--serif);margin:10px 0 0;letter-spacing:-.2px;text-wrap:balance}
+    .hero{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+    .progress-card{margin-top:20px;display:flex;align-items:center;gap:16px}.progress-card .pct{font:700 40px/1 var(--serif);min-width:92px}.progress-card .bar{flex:1;margin:0}.progress-card small{display:block;color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+    .bar{height:6px;background:#2c2c35;border-radius:99px;overflow:hidden}.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;transition:width .3s}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}
+    .stat{padding:14px 14px 13px;background:var(--panel);border:1px solid var(--line);border-radius:14px}.stat small{color:var(--muted);display:block;margin-bottom:6px;font-size:11px;letter-spacing:.8px;text-transform:uppercase}.stat strong{font:700 26px/1 var(--serif)}.stat span{color:var(--muted);font-size:11px;margin-left:4px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 13px}.section-head h2,.section-head h3{font:700 19px/1.1 var(--serif);margin:0}
+    .muted{color:var(--muted)}
+    .btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:10px 14px;font-weight:600}.btn.primary{background:var(--gold);border-color:var(--gold);color:var(--ink)}.btn.small{padding:7px 10px;font-size:12px}.btn.danger{color:var(--danger);border-color:#4a2c2c;background:#1d1517}.btn:disabled{opacity:.5}
+    .filters{display:flex;gap:7px;overflow:auto;padding-bottom:6px;margin-bottom:6px;scrollbar-width:none}.chip{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;padding:7px 13px;white-space:nowrap;font-size:12px}.chip.active{background:var(--golddim);color:var(--gold2);border-color:#5d4a1f}
+    .habit-list{display:grid;gap:9px}
+    .habit{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px}.habit.done{border-color:#5d4a1f;background:#17140d}.habit.off{opacity:.55}
+    .emoji{width:42px;height:42px;border-radius:12px;background:var(--panel2);display:grid;place-items:center;font-size:20px;flex:none}
+    .habit-main{min-width:0;flex:1}.habit-name{font-weight:650;letter-spacing:-.1px}.habit-meta{font-size:12px;color:var(--muted);margin-top:3px}.habit-meta .tag{color:var(--gold2)}
+    .streak{text-align:center;line-height:1;flex:none;min-width:34px}.streak b{display:block;font:700 18px/1 var(--serif);color:var(--gold2)}.streak small{font-size:9px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase}
+    .check{width:36px;height:36px;border-radius:50%;border:1.5px solid #4a4a55;background:transparent;color:transparent;font-size:18px;display:grid;place-items:center;flex:none;transition:background .15s,border-color .15s}.done .check,.check.on{background:var(--gold);border-color:var(--gold);color:var(--ink)}.check:disabled{opacity:.35}
+    .empty{border:1px dashed #3a3a44;border-radius:16px;padding:28px;text-align:center;color:var(--muted)}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:14px}.panel h3{font:700 17px/1.1 var(--serif);margin:0 0 14px}
+    .week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{text-align:center;color:var(--muted);font-size:11px;text-transform:capitalize}.dot{height:30px;width:30px;margin:7px auto 0;border-radius:50%;background:var(--panel2);display:grid;place-items:center;color:var(--muted);font-size:11px}.dot.today{outline:1px solid var(--gold);color:var(--gold2)}.dot.full{background:var(--gold);color:var(--ink);font-weight:800}
+    .category-row,.mh-row{display:flex;justify-content:space-between;gap:10px;margin:13px 0;font-size:12px}.category-row span:last-child,.mh-row span:last-child{color:var(--muted);white-space:nowrap}.cat-track{height:5px;border-radius:99px;background:#2c2c35;margin-top:6px;overflow:hidden}.cat-track i{display:block;height:100%;background:var(--gold);border-radius:99px}
+    .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:16px}.summary div{background:var(--panel2);border-radius:12px;padding:10px 12px}.summary small{display:block;color:var(--muted);font-size:10px;letter-spacing:.8px;text-transform:uppercase}.summary strong{font:700 20px/1.3 var(--serif)}.up{color:var(--gold2)}.down{color:var(--danger)}
+    .chart{display:flex;align-items:flex-end;gap:3px;height:140px;border-bottom:1px solid var(--line);background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 50%;background-repeat:repeat-y}.chart button{flex:1;min-width:0;height:100%;border:0;background:transparent;padding:0;display:flex;align-items:flex-end;border-radius:4px}.chart i{display:block;width:100%;background:var(--gold);border-radius:4px 4px 2px 2px;min-height:3px}.chart i.none{background:#2f2f38}.chart button.sel i{background:var(--gold2);box-shadow:0 0 0 2px #f2d38855}.chart-axis{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:7px}.chart-info{color:var(--muted);font-size:12px;margin-top:10px;min-height:18px}
+    .month-nav{display:flex;align-items:center;gap:8px}.month-title{display:block;font-size:13px;min-width:128px;text-align:center;font-weight:650}
+    .calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.cal-head{text-align:center;color:var(--muted);font-size:10px;padding:5px 0;letter-spacing:.8px;text-transform:uppercase}.cal-day{min-height:44px;border:1px solid transparent;border-radius:12px;background:var(--panel2);color:var(--text);font-size:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.cal-day.blank{background:transparent}.cal-day.selected{border-color:var(--gold);color:var(--gold2)}.cal-day.today{font-weight:800}.cal-day .mini{width:5px;height:5px;border-radius:50%;background:var(--gold)}.cal-day .mini.part{background:transparent;border:1px solid var(--gold)}
+    .day-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}.day-row:first-of-type{border-top:0}.day-row .nm{flex:1;min-width:0}
+    dialog{border:1px solid var(--line);border-radius:20px;background:#17171c;color:var(--text);width:min(440px,calc(100% - 28px));max-height:calc(100% - 28px);padding:22px;box-shadow:0 24px 90px #000a}dialog::backdrop{background:#000b;backdrop-filter:blur(4px)}
+    .form-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.form-head h3{margin:0;font:700 20px/1.1 var(--serif)}.x{border:0;background:transparent;color:var(--muted);font-size:26px;line-height:1}
+    .field{display:grid;gap:6px;margin:13px 0}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;border:1px solid var(--line);background:#0f0f13;color:var(--text);border-radius:11px;padding:11px 12px;color-scheme:dark}
+    .day-picks label{display:flex;align-items:center;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:11px;color:var(--muted)}.day-picks input{accent-color:var(--gold)}
+    .form-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:20px}.form-actions .right{display:flex;gap:8px;margin-left:auto}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:14px 0;font-size:13px}.row input[type=checkbox]{accent-color:var(--gold);width:19px;height:19px}.row input[type=time]{border:1px solid var(--line);background:#0f0f13;color:var(--text);border-radius:11px;padding:8px 10px;color-scheme:dark}
+    .status{font-size:12px;padding:10px 12px;border-radius:12px;background:var(--panel2);color:var(--muted)}.status.ok{color:var(--gold2)}
+    .stack{display:grid;gap:9px}.stack .btn{width:100%}.note{color:var(--muted);font-size:12px;margin:10px 0 0}
+    .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;background:#0c0c0fe8;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px max(10px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+    .tabbar>div{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:560px;gap:4px}
+    .tab-btn{border:0;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:12px;font-size:11px;letter-spacing:.3px}.tab-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.tab-btn[aria-current=page]{color:var(--gold2)}.tab-btn[aria-current=page] svg{stroke:var(--gold)}
+    .toast{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,8px);width:max-content;max-width:calc(100% - 36px);background:var(--gold2);color:var(--ink);padding:11px 16px;border-radius:14px;font-size:13px;font-weight:650;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .toast.quote-t{font:italic 600 14px/1.35 var(--serif)}
+    @media(max-width:420px){.stat strong{font-size:22px}.progress-card .pct{font-size:34px;min-width:78px}.summary strong{font-size:17px}.chart{gap:2px}.stats{gap:8px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
   </style>
 </head>
 <body>
-<div class="shell">
+<div class="app">
   <header class="top">
-    <div class="brand"><div class="mark">H</div><div><h1>Habit</h1><p>Tu progreso, a tu ritmo</p></div></div>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 128 128" aria-hidden="true"><rect width="128" height="128" rx="34" fill="#0c0c0f"/><rect x="3" y="3" width="122" height="122" rx="31" fill="none" stroke="#e2b04a" stroke-opacity=".5" stroke-width="3"/><g fill="none" stroke="#e2b04a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M25 47C25 36 34 31 42 31C51 31 59 37 59 47C59 56 53 62 45 69L24 93H60"/><path d="M97 94V32L67 72H108"/></g></svg>
+      <div><h1>Habit</h1><p>Constancia diaria</p></div>
+    </div>
     <div class="date" id="todayLabel"></div>
   </header>
-  <section class="hero">
-    <div><div class="eyebrow">Tu espacio personal</div><h2>Un día a la vez.</h2><p>La constancia se construye con pequeñas acciones.</p></div>
-    <div class="progress-card"><div class="progress-head"><span>Progreso de hoy</span><strong id="progressText">0%</strong></div><div class="bar"><span id="progressBar"></span></div></div>
+
+  <!-- HOY -->
+  <section id="tab-hoy" data-tab="hoy">
+    <div class="hero">
+      <div class="eyebrow">Frase del día</div>
+      <p class="quote" id="dailyQuote"></p>
+      <div class="progress-card"><div class="pct" id="progressText">0%</div><div style="flex:1"><small>Progreso de hoy</small><div class="bar"><span id="progressBar"></span></div></div></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><small>Hoy</small><strong id="completedStat">0/0</strong></div>
+      <div class="stat"><small>Racha</small><strong id="streakStat">0</strong><span>días</span></div>
+      <div class="stat"><small>Este mes</small><strong id="monthStat">0%</strong></div>
+    </div>
+    <div class="section-head"><h2>Mis hábitos</h2><button class="btn primary" id="addBtn">＋ Añadir</button></div>
+    <nav class="filters" id="filters"></nav>
+    <main class="habit-list" id="habitList"></main>
+    <div class="panel" style="margin-top:18px"><h3>Últimos 7 días</h3><div class="week" id="weekView"></div></div>
   </section>
-  <section class="stats">
-    <div class="stat"><small>Hábitos de hoy</small><strong id="completedStat">0/0</strong><span>completados</span></div>
-    <div class="stat"><small>Racha actual</small><strong id="streakStat">0</strong><span>días</span></div>
-    <div class="stat"><small>Este mes</small><strong id="monthStat">0%</strong><span>cumplimiento</span></div>
+
+  <!-- PROGRESO -->
+  <section id="tab-progreso" data-tab="progreso" hidden>
+    <div class="section-head" style="margin-top:4px"><h2>Progreso</h2></div>
+    <div class="panel">
+      <h3>Últimos 30 días</h3>
+      <div class="summary" id="chartSummary"></div>
+      <div class="chart" id="chart" role="group" aria-label="Porcentaje de hábitos cumplidos por día"></div>
+      <div class="chart-axis" id="chartAxis"></div>
+      <div class="chart-info" id="chartInfo"></div>
+    </div>
+    <div class="panel">
+      <div class="section-head" style="margin:0 0 14px"><h3 id="monthStatsTitle" style="margin:0">Estadísticas del mes</h3><div class="month-nav"><button class="btn small" data-month="-1" aria-label="Mes anterior">‹</button><button class="btn small" data-month="1" aria-label="Mes siguiente">›</button></div></div>
+      <div id="monthStats"></div>
+    </div>
+    <div class="panel"><h3>Hoy por categoría</h3><div id="categoryStats"></div></div>
   </section>
-  <div class="section-head hab-head"><h3>Mis hábitos</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="remindBtn">🔔 Recordatorios</button><button class="btn" id="backupBtn">Copia de seguridad</button><button class="btn primary" id="addBtn">＋ Añadir hábito</button></div></div>
-  <nav class="filters" id="filters"></nav>
-  <main class="habit-list" id="habitList"></main>
-  <section class="panel" style="margin-top:22px">
-    <h3>Últimos 30 días</h3>
-    <div class="summary" id="chartSummary"></div>
-    <div class="chart" id="chart" role="group" aria-label="Porcentaje de hábitos cumplidos por día"></div>
-    <div class="chart-axis" id="chartAxis"></div>
-    <div class="chart-info" id="chartInfo"></div>
+
+  <!-- CALENDARIO -->
+  <section id="tab-calendario" data-tab="calendario" hidden>
+    <div class="section-head" style="margin-top:4px"><h2>Calendario</h2><div class="month-nav"><button class="btn small" data-month="-1" aria-label="Mes anterior">‹</button><strong class="month-title"></strong><button class="btn small" data-month="1" aria-label="Mes siguiente">›</button></div></div>
+    <div class="panel"><div class="calendar-grid" id="monthCalendar"></div></div>
+    <div class="panel"><h3 id="dayTitle"></h3><div id="dayList"></div></div>
   </section>
-  <section class="panel" style="margin-top:22px">
-    <div class="section-head" style="margin:0 0 14px"><h3>Calendario mensual</h3><div style="display:flex;align-items:center;gap:8px"><button class="btn small" id="prevMonth" aria-label="Mes anterior">‹</button><strong id="monthTitle" style="font-size:13px;min-width:125px;text-align:center"></strong><button class="btn small" id="nextMonth" aria-label="Mes siguiente">›</button></div></div>
-    <div class="calendar-grid" id="monthCalendar"></div>
-    <div id="selectedDayInfo" class="muted" style="font-size:12px;margin-top:12px"></div>
+
+  <!-- AJUSTES -->
+  <section id="tab-ajustes" data-tab="ajustes" hidden>
+    <div class="section-head" style="margin-top:4px"><h2>Ajustes</h2></div>
+    <div class="panel">
+      <h3>Recordatorios</h3>
+      <div class="status" id="remStatus"></div>
+      <div class="stack" style="margin-top:12px"><button class="btn primary" id="remEnable"></button></div>
+      <div class="row"><label for="remDaily">Resumen diario de hábitos pendientes</label><input type="checkbox" id="remDaily"></div>
+      <div class="row"><label for="remTime">Hora del resumen</label><input type="time" id="remTime"></div>
+      <div class="stack"><button class="btn" id="remTest">Enviar aviso de prueba</button></div>
+      <p class="note">Cada hábito puede tener su propia hora: editalo desde la pestaña Hoy con “···”. Los avisos se envían con la app abierta o en segundo plano; sin un servidor, el navegador no puede garantizar avisos con la app totalmente cerrada.</p>
+    </div>
+    <div class="panel">
+      <h3>Copia de seguridad</h3>
+      <p class="muted" style="font-size:13px;margin-top:0">Guardá tus hábitos e historial en un archivo o recuperá una copia anterior. Hacela de vez en cuando: tus datos viven solo en este dispositivo.</p>
+      <div class="stack"><button class="btn primary" id="exportBtn">↓ Exportar mis datos</button><button class="btn" id="importBtn">↑ Importar una copia</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
+      <p class="note">La copia contiene nombres de hábitos, categorías y registros diarios. Guardala en un lugar privado.</p>
+    </div>
+    <p class="note" style="text-align:center">Habit v1.3 · Los datos se guardan en este dispositivo</p>
   </section>
-  <section class="panel" style="margin-top:14px">
-    <h3 id="monthStatsTitle">Estadísticas del mes</h3>
-    <div id="monthStats"></div>
-  </section>
-  <section class="lower">
-    <div class="panel"><h3>Esta semana</h3><div class="week" id="weekView"></div></div>
-    <div class="panel"><h3>Por categoría</h3><div id="categoryStats"></div></div>
-  </section>
-  <footer>Tus datos se guardan en este dispositivo. Exportá una copia desde "Copia de seguridad". · Habit v1.2</footer>
 </div>
+
+<nav class="tabbar" aria-label="Secciones"><div>
+  <button class="tab-btn" data-go="hoy"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>Hoy</button>
+  <button class="tab-btn" data-go="progreso"><svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>Progreso</button>
+  <button class="tab-btn" data-go="calendario"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendario</button>
+  <button class="tab-btn" data-go="ajustes"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>Ajustes</button>
+</div></nav>
+
 <dialog id="habitDialog">
   <form id="habitForm">
     <div class="form-head"><h3 id="dialogTitle">Nuevo hábito</h3><button class="x" type="button" id="closeDialog" aria-label="Cerrar">×</button></div>
@@ -81,33 +154,58 @@
     <div class="field"><label for="habitEmoji">Ícono (emoji)</label><input id="habitEmoji" maxlength="4" value="✦" placeholder="✦"></div>
     <div class="field"><label>¿Qué días querés realizarlo?</label><div class="day-picks" id="dayPicks" style="display:flex;gap:6px;flex-wrap:wrap"><label><input type="checkbox" value="1" checked> Lun</label><label><input type="checkbox" value="2" checked> Mar</label><label><input type="checkbox" value="3" checked> Mié</label><label><input type="checkbox" value="4" checked> Jue</label><label><input type="checkbox" value="5" checked> Vie</label><label><input type="checkbox" value="6" checked> Sáb</label><label><input type="checkbox" value="0" checked> Dom</label></div></div>
     <div class="field"><label for="habitTime">Recordatorio a las (opcional)</label><input id="habitTime" type="time"></div>
-    <div class="form-actions"><button class="btn" type="button" id="cancelBtn">Cancelar</button><button class="btn primary" type="submit">Guardar hábito</button></div>
+    <div class="field"><label for="habitPhrase">Tu frase para este hábito (opcional)</label><input id="habitPhrase" maxlength="110" placeholder="Si la dejás vacía, Habit elige una"></div>
+    <div class="form-actions"><button class="btn danger" type="button" id="deleteBtn" hidden>Eliminar</button><div class="right"><button class="btn" type="button" id="cancelBtn">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></div>
   </form>
 </dialog>
-<dialog id="backupDialog">
-  <div class="form-head"><h3>Copia de seguridad</h3><button class="x" type="button" id="closeBackup" aria-label="Cerrar">×</button></div>
-  <p class="muted" style="font-size:13px;margin-top:0">Guardá tus hábitos e historial en un archivo o recuperá una copia anterior.</p>
-  <div class="backup-actions">
-    <button class="btn primary" id="exportBtn">↓ Exportar mis datos</button>
-    <button class="btn" id="importBtn">↑ Importar una copia</button>
-    <input type="file" id="importFile" accept="application/json,.json" hidden>
-  </div>
-  <p class="muted" style="font-size:11px;margin-bottom:0">La copia contiene nombres de hábitos, categorías y registros diarios. Guardala en un lugar privado.</p>
-</dialog>
-<dialog id="remindDialog">
-  <div class="form-head"><h3>Recordatorios</h3><button class="x" type="button" id="closeRemind" aria-label="Cerrar">×</button></div>
-  <div class="status" id="remStatus"></div>
-  <div class="backup-actions" style="margin-top:12px"><button class="btn primary" id="remEnable"></button></div>
-  <div class="row"><label for="remDaily">Resumen diario de hábitos pendientes</label><input type="checkbox" id="remDaily"></div>
-  <div class="row"><label for="remTime">Hora del resumen</label><input type="time" id="remTime"></div>
-  <p class="muted" style="font-size:12px;margin:6px 0 12px">Además, cada hábito puede tener su propia hora (editalo con “···”). Solo avisan los días programados y si todavía no lo completaste.</p>
-  <button class="btn" id="remTest" style="width:100%">Enviar aviso de prueba</button>
-  <p class="muted" style="font-size:11px;margin-bottom:0">Los avisos se envían con la app abierta o en segundo plano. Sin un servidor, el navegador no puede garantizar avisos si la app está totalmente cerrada.</p>
-</dialog>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-const KEY='habit-v1-data',FIRED_KEY='habit-fired';
+const KEY='habit-v1-data',FIRED_KEY='habit-fired',TAB_KEY='habit-tab';
 const DAY_NAMES=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],DAY_ORDER=[1,2,3,4,5,6,0];
+const CATS=['Salud','Disciplina','Aprendizaje','Espiritualidad','Productividad','Desarrollo personal','Otro'];
+const PHRASES=[
+ 'Lo que hacés todos los días pesa más que lo que hacés a veces.',
+ 'No esperes ganas: empezá, y las ganas te alcanzan.',
+ 'Un día más de trabajo silencioso es un día menos de duda.',
+ 'La disciplina es hacerlo cuando nadie aplaude.',
+ 'Cada repetición es un voto por la persona que querés ser.',
+ 'Hoy no tenés que ser perfecto, tenés que ser constante.',
+ 'El talento abre la puerta; la rutina la mantiene abierta.',
+ 'Entrená como si el resultado ya se estuviera construyendo.',
+ 'Los grandes cambios se arman con días comunes bien trabajados.',
+ 'Cumplí con vos mismo. Esa es la promesa más difícil.',
+ 'Lo difícil de hoy es lo fácil de mañana.',
+ 'El ritmo vence a la prisa.',
+ 'Cuando cueste, acordate por qué empezaste.',
+ 'Mejorar un 1% hoy ya es ganar el día.',
+ 'No cuentes los días: hacé que los días cuenten.',
+ 'Se gana temprano, en silencio y sin testigos.',
+ 'El esfuerzo de hoy es el orgullo de mañana.',
+ 'Prepararte bien es la mitad de la victoria.',
+ 'No hace falta motivación cuando hay hábito.',
+ 'Sé obsesivo con los detalles; ahí vive la diferencia.',
+ 'Un paso corto todos los días llega más lejos que un salto único.',
+ 'Competí con quien eras ayer.',
+ 'La constancia es talento en cámara lenta.',
+ 'Dormiste igual que ayer; lo que cambia es lo que hacés al despertar.',
+ 'Hacé hoy lo que tu yo de dentro de un año va a agradecer.',
+ 'Si es importante, encontrás el tiempo; si no, encontrás excusas.',
+ 'Aprendé a disfrutar del proceso: es lo único que controlás.',
+ 'La mentalidad se entrena igual que el cuerpo.',
+ 'Perder un día es humano; perder dos es una decisión.',
+ 'Terminá lo que empezaste, aunque sea en versión corta.',
+ 'Que tu mejor versión no dependa del estado de ánimo.',
+ 'El trabajo duro tiene memoria: nada de lo que hacés se pierde.',
+ 'Elegí el compromiso por encima de la comodidad.',
+ 'Los días grises también suman.',
+ 'Hacerlo mal hoy es mejor que hacerlo perfecto nunca.',
+ 'Tu futuro se decide en las pequeñas cosas de la mañana.',
+ 'Respetá el proceso y los resultados te encuentran.',
+ 'La pasión te mueve; la disciplina te sostiene.',
+ 'Cada tilde es una prueba de que cumplís tu palabra.',
+ 'Hoy es un buen día para volver a empezar, y mañana también.'
+];
 const defaults=[
  {id:'run',name:'Salir a correr',category:'Salud',emoji:'🏃',days:[1,2,3,4,5,6,0]},
  {id:'box',name:'Entrenar boxeo',category:'Salud',emoji:'🥊',days:[1,2,3,4,5,6,0]},
@@ -115,29 +213,48 @@ const defaults=[
  {id:'plan',name:'Organizar el día',category:'Productividad',emoji:'🗓️',days:[1,2,3,4,5,6,0]},
  {id:'reflect',name:'Tiempo de reflexión',category:'Espiritualidad',emoji:'🌿',days:[1,2,3,4,5,6,0]}
 ];
-const CATS=['Salud','Disciplina','Aprendizaje','Espiritualidad','Productividad','Desarrollo personal','Otro'];
-let data=load(),filter='Todos',editing=null,calendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1),selectedDate=dateKey(),chartDays=[],chartSel=null;
 
 /* ---------- datos ---------- */
 function normSettings(s){return {remind:{enabled:false,daily:true,time:'20:00',...((s&&s.remind)||{})}}}
-function load(){
- let x=null;try{x=JSON.parse(localStorage.getItem(KEY))}catch{}
- if(!(x&&Array.isArray(x.habits)))x={habits:JSON.parse(JSON.stringify(defaults)),logs:{}};
- if(!x.logs||typeof x.logs!=='object')x.logs={};
- x.settings=normSettings(x.settings);return x;
+// Asegura estructura y asigna fecha de inicio a hábitos viejos (primer día con registro, o hoy).
+function normData(x){
+ if(!x||!Array.isArray(x.habits))return null;
+ x.logs=(x.logs&&typeof x.logs==='object')?x.logs:{};
+ x.settings=normSettings(x.settings);
+ const keys=Object.keys(x.logs).sort();
+ x.habits.forEach(h=>{if(!h.start){const f=keys.find(k=>(x.logs[k]||[]).includes(h.id));h.start=f||dateKey()}});
+ return x;
 }
+function load(){let x=null;try{x=normData(JSON.parse(localStorage.getItem(KEY)))}catch{}return x||normData({habits:JSON.parse(JSON.stringify(defaults)),logs:{}})}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch{}}
 function dateKey(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function parseKey(k){const [y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+let data=load(),filter='Todos',editing=null,viewMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1),selectedDate=dateKey(),chartDays=[],chartSel=null,tab='hoy';
 function done(id,key=dateKey()){return !!(data.logs[key]||[]).includes(id)}
-function scheduled(h,d){const days=Array.isArray(h.days)&&h.days.length?h.days:[0,1,2,3,4,5,6];return days.includes(d.getDay())}
+function scheduled(h,d){
+ if(h.start&&dateKey(d)<h.start)return false;
+ const days=Array.isArray(h.days)&&h.days.length?h.days:[0,1,2,3,4,5,6];return days.includes(d.getDay());
+}
 function dueOn(d){return data.habits.filter(h=>scheduled(h,d))}
 function dayStats(d){const k=dateKey(d),due=dueOn(d),n=due.filter(h=>done(h.id,k)).length;return {due:due.length,done:n,pct:due.length?Math.round(n/due.length*100):null}}
-function setDone(id){const k=dateKey();data.logs[k]??=[];data.logs[k]=done(id,k)?data.logs[k].filter(x=>x!==id):[...data.logs[k],id];save();render()}
+
+/* ---------- frases ---------- */
+function dayIdx(d){return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)}
+function hash(s){let n=0;for(let i=0;i<s.length;i++)n+=s.charCodeAt(i)*(i+1);return n}
+function dailyPhrase(){return PHRASES[dayIdx(new Date())%PHRASES.length]}
+function phraseFor(h,d=new Date()){return (h.phrase&&h.phrase.trim())||PHRASES[(dayIdx(d)+hash(h.id))%PHRASES.length]}
+
+/* ---------- marcar ---------- */
+function toggle(id,key){
+ data.logs[key]??=[];
+ const was=done(id,key);
+ data.logs[key]=was?data.logs[key].filter(x=>x!==id):[...data.logs[key],id];
+ save();render();
+ if(!was){const h=data.habits.find(x=>x.id===id);if(h)toast(phraseFor(h,parseKey(key)),true)}
+}
 
 /* ---------- rachas (solo cuentan los días programados) ---------- */
-// Racha global: un día cuenta si completaste TODOS los hábitos programados ese día.
-// Los días sin hábitos programados no cortan ni suman. Hoy sin terminar no corta la racha.
 function streak(){
  let n=0;const d=new Date();
  for(let i=0;i<3650;i++,d.setDate(d.getDate()-1)){
@@ -149,7 +266,6 @@ function streak(){
  }
  return n;
 }
-// Racha de un hábito: los días en que no estaba programado se saltean.
 function habitStreak(h){
  let n=0;const d=new Date();
  for(let i=0;i<3650;i++,d.setDate(d.getDate()-1)){
@@ -176,24 +292,25 @@ function monthStats(y,m){
 }
 function monthRate(){const n=new Date();return monthStats(n.getFullYear(),n.getMonth()).pct}
 function renderMonthStats(){
- const y=calendarMonth.getFullYear(),m=calendarMonth.getMonth(),s=monthStats(y,m),p=monthStats(y,m-1);
- const name=calendarMonth.toLocaleDateString('es-AR',{month:'long'});
- document.getElementById('monthStatsTitle').textContent='Estadísticas de '+name;
+ const y=viewMonth.getFullYear(),m=viewMonth.getMonth(),s=monthStats(y,m),p=monthStats(y,m-1);
+ const name=viewMonth.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+ document.getElementById('monthStatsTitle').textContent=name.charAt(0).toUpperCase()+name.slice(1);
  const box=document.getElementById('monthStats');
  if(!s.due){box.innerHTML='<div class="muted" style="font-size:12px">Todavía no hay datos para este mes.</div>';return}
  const diff=p.due?s.pct-p.pct:null;
- const delta=diff===null?'':`<em class="${diff>=0?'up':'down'}">${diff>=0?'▲':'▼'} ${Math.abs(diff)} pts vs mes anterior</em>`;
+ const delta=diff===null?'':`<div style="margin:-6px 0 12px;font-size:12px"><span class="${diff>=0?'up':'down'}">${diff>=0?'▲':'▼'} ${Math.abs(diff)} pts vs mes anterior</span></div>`;
  const rows=data.habits.filter(h=>s.per[h.id].due>0).map(h=>({h,...s.per[h.id],pct:Math.round(s.per[h.id].hit/s.per[h.id].due*100)})).sort((a,b)=>b.pct-a.pct||b.hit-a.hit);
- box.innerHTML=`<div class="summary"><div><small>Cumplimiento</small><strong>${s.pct}%</strong></div><div><small>Completados</small><strong>${s.hit}/${s.due}</strong></div><div><small>Días perfectos</small><strong>${s.perfect}/${s.active}</strong></div></div>${delta?`<div style="margin:-6px 0 12px;font-size:12px">${delta}</div>`:''}`+
+ box.innerHTML=`<div class="summary"><div><small>Cumplimiento</small><strong>${s.pct}%</strong></div><div><small>Completados</small><strong>${s.hit}/${s.due}</strong></div><div><small>Perfectos</small><strong>${s.perfect}/${s.active}</strong></div></div>${delta}`+
   rows.map(r=>`<div class="mh-row"><div style="flex:1">${esc(r.h.emoji||'✦')} ${esc(r.h.name)}<div class="cat-track"><i style="width:${r.pct}%"></i></div></div><span>${r.hit}/${r.due} · ${r.pct}%</span></div>`).join('');
 }
 
 /* ---------- gráfico de 30 días ---------- */
+function chartLabel(x){const t=x.d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});return x.pct===null?`${t}: no había hábitos programados.`:`${t}: ${x.done} de ${x.due} hábitos (${x.pct}%).`}
 function renderChart(){
  chartDays=[];
  for(let i=29;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);chartDays.push({d,k:dateKey(d),...dayStats(d)})}
  let due=0,hit=0,perfect=0;chartDays.forEach(x=>{due+=x.due;hit+=x.done;if(x.due&&x.done===x.due)perfect++});
- document.getElementById('chartSummary').innerHTML=`<div><small>Promedio</small><strong>${due?Math.round(hit/due*100):0}%</strong></div><div><small>Días perfectos</small><strong>${perfect}</strong></div><div><small>Completados</small><strong>${hit}/${due}</strong></div>`;
+ document.getElementById('chartSummary').innerHTML=`<div><small>Promedio</small><strong>${due?Math.round(hit/due*100):0}%</strong></div><div><small>Perfectos</small><strong>${perfect}</strong></div><div><small>Completados</small><strong>${hit}/${due}</strong></div>`;
  document.getElementById('chart').innerHTML=chartDays.map((x,i)=>{
   const none=x.pct===null,label=chartLabel(x);
   return `<button data-i="${i}" class="${chartSel===x.k?'sel':''}" title="${esc(label)}" aria-label="${esc(label)}"><i class="${none?'none':''}" style="height:${none?3:Math.max(x.pct,3)}%;${none?'':`opacity:${(.4+.6*x.pct/100).toFixed(2)}`}"></i></button>`}).join('');
@@ -202,27 +319,31 @@ function renderChart(){
  const sel=chartDays.find(x=>x.k===chartSel);
  document.getElementById('chartInfo').textContent=sel?chartLabel(sel):'Tocá una barra para ver el detalle del día.';
 }
-function chartLabel(x){const t=x.d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});return x.pct===null?`${t}: no había hábitos programados.`:`${t}: ${x.done} de ${x.due} hábitos (${x.pct}%).`}
 
 /* ---------- calendario ---------- */
 function renderCalendar(){
- const y=calendarMonth.getFullYear(),m=calendarMonth.getMonth();
- document.getElementById('monthTitle').textContent=calendarMonth.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+ const y=viewMonth.getFullYear(),m=viewMonth.getMonth();
+ const title=viewMonth.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+ document.querySelectorAll('.month-title').forEach(e=>e.textContent=title);
  const grid=document.getElementById('monthCalendar');
- const names=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
- grid.innerHTML=names.map(n=>`<div class="cal-head">${n}</div>`).join('');
+ grid.innerHTML=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map(n=>`<div class="cal-head">${n}</div>`).join('');
  const offset=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate(),today=dateKey();
- for(let i=0;i<offset;i++){let b=document.createElement('div');b.className='cal-day blank';grid.append(b)}
+ for(let i=0;i<offset;i++){const b=document.createElement('div');b.className='cal-day blank';grid.append(b)}
  for(let day=1;day<=days;day++){
-   let d=new Date(y,m,day),k=dateKey(d),s=dayStats(d);
-   let b=document.createElement('button');b.className='cal-day'+(k===selectedDate?' selected':'')+(k===today?' today':'');
-   b.innerHTML=`${day}${s.due&&s.done===s.due?'<i class="mini"></i>':''}`;
-   b.addEventListener('click',()=>{selectedDate=k;renderCalendar()});
-   grid.append(b);
+  const d=new Date(y,m,day),k=dateKey(d),s=dayStats(d);
+  const b=document.createElement('button');b.className='cal-day'+(k===selectedDate?' selected':'')+(k===today?' today':'');
+  b.innerHTML=`${day}${s.due&&s.done===s.due?'<i class="mini"></i>':(s.done>0?'<i class="mini part"></i>':'')}`;
+  b.addEventListener('click',()=>{selectedDate=k;renderCalendar()});
+  grid.append(b);
  }
- const [sy,sm,sd]=selectedDate.split('-').map(Number),d=new Date(sy,sm-1,sd),s=dayStats(d);
- document.getElementById('selectedDayInfo').textContent=`${d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'})}: ${s.done} de ${s.due} hábitos programados completados.`;
- renderMonthStats();
+ renderDayPanel();
+}
+function renderDayPanel(){
+ const d=parseKey(selectedDate),k=selectedDate,future=k>dateKey(),list=dueOn(d),s=dayStats(d);
+ document.getElementById('dayTitle').textContent=d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'})+(s.due?` · ${s.done}/${s.due}`:'');
+ const box=document.getElementById('dayList');
+ if(!list.length){box.innerHTML='<div class="muted" style="font-size:13px">No había hábitos programados este día.</div>';return}
+ box.innerHTML=list.map(h=>`<div class="day-row"><div class="emoji" style="width:36px;height:36px;font-size:17px">${esc(h.emoji||'✦')}</div><div class="nm">${esc(h.name)}</div><button class="check ${done(h.id,k)?'on':''}" data-dcheck="${esc(h.id)}" ${future?'disabled':''} aria-label="${done(h.id,k)?'Desmarcar':'Completar'} ${esc(h.name)}">${done(h.id,k)?'✓':''}</button></div>`).join('')+(future?'<p class="note">Todavía no podés marcar días futuros.</p>':'<p class="note">Podés corregir días pasados tocando el círculo.</p>');
 }
 
 /* ---------- render principal ---------- */
@@ -231,22 +352,38 @@ function daysLabel(h){
  return days.length>=7?'Todos los días':DAY_ORDER.filter(x=>days.includes(x)).map(x=>DAY_NAMES[x]).join(' · ');
 }
 function render(){
- const now=new Date(),k=dateKey(now);document.getElementById('todayLabel').textContent=now.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+ const now=new Date(),k=dateKey(now);
+ document.getElementById('todayLabel').textContent=now.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+ document.getElementById('dailyQuote').textContent=dailyPhrase();
  const s=dayStats(now),pct=s.due?s.pct:0;
- document.getElementById('progressText').textContent=pct+'%';document.getElementById('progressBar').style.width=pct+'%';document.getElementById('completedStat').textContent=`${s.done}/${s.due}`;document.getElementById('streakStat').textContent=streak();document.getElementById('monthStat').textContent=monthRate()+'%';
- const cats=['Todos',...CATS];
- document.getElementById('filters').innerHTML=cats.map(c=>`<button class="chip ${filter===c?'active':''}" data-filter="${esc(c)}">${esc(c)}</button>`).join('');
+ document.getElementById('progressText').textContent=pct+'%';document.getElementById('progressBar').style.width=pct+'%';
+ document.getElementById('completedStat').textContent=`${s.done}/${s.due}`;document.getElementById('streakStat').textContent=streak();document.getElementById('monthStat').textContent=monthRate()+'%';
+ const used=CATS.filter(c=>data.habits.some(h=>h.category===c));
+ if(filter!=='Todos'&&!used.includes(filter))filter='Todos';
+ const fb=document.getElementById('filters');fb.hidden=used.length<2;
+ fb.innerHTML=['Todos',...used].map(c=>`<button class="chip ${filter===c?'active':''}" data-filter="${esc(c)}">${esc(c)}</button>`).join('');
  const shown=data.habits.filter(h=>filter==='Todos'||h.category===filter);
  document.getElementById('habitList').innerHTML=shown.length?shown.map(h=>{
-  const due=scheduled(h,now),st=habitStreak(h);
-  return `<article class="habit ${done(h.id)?'done':''} ${due?'':'off'}"><div class="emoji">${esc(h.emoji||'✦')}</div><div class="habit-main"><div class="habit-name">${esc(h.name)}</div><div class="habit-meta">${esc(h.category)} · ${esc(daysLabel(h))}${h.time?` · ⏰ ${esc(h.time)}`:''}${due?'':' · <span class="tag">No toca hoy</span>'}</div></div><div class="streak">🔥 ${st} ${st===1?'seguido':'seguidos'}</div><button class="check" data-check="${esc(h.id)}" aria-label="${done(h.id)?'Desmarcar':'Completar'} ${esc(h.name)}">${done(h.id)?'✓':''}</button><button class="btn small" data-edit="${esc(h.id)}" aria-label="Editar ${esc(h.name)}">···</button></article>`}).join(''):`<div class="empty">No hay hábitos en esta categoría.<br><br>Agregá uno para empezar.</div>`;
+  const due=scheduled(h,now),st=habitStreak(h),dn=done(h.id);
+  return `<article class="habit ${dn?'done':''} ${due?'':'off'}"><div class="emoji">${esc(h.emoji||'✦')}</div><div class="habit-main"><div class="habit-name">${esc(h.name)}</div><div class="habit-meta">${esc(h.category)} · ${esc(daysLabel(h))}${h.time?` · ${esc(h.time)}`:''}${due?'':' · <span class="tag">No toca hoy</span>'}</div></div><div class="streak" title="Racha de ${esc(h.name)}"><b>${st}</b><small>racha</small></div><button class="check" data-check="${esc(h.id)}" aria-label="${dn?'Desmarcar':'Completar'} ${esc(h.name)}">${dn?'✓':''}</button><button class="btn small" data-edit="${esc(h.id)}" aria-label="Editar ${esc(h.name)}">···</button></article>`}).join(''):`<div class="empty">No hay hábitos todavía.<br><br>Tocá “Añadir” para empezar.</div>`;
  const week=document.getElementById('weekView');week.innerHTML='';
  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const st=dayStats(d);const el=document.createElement('div');el.className='day';el.innerHTML=`${d.toLocaleDateString('es-AR',{weekday:'short'}).replace('.','')}<div class="dot ${st.due&&st.done===st.due?'full':''} ${i===0?'today':''}">${d.getDate()}</div>`;week.append(el)}
- renderChart();renderCalendar();
- const box=document.getElementById('categoryStats'),dueNow=dueOn(now);
- box.innerHTML=CATS.map(c=>{const hs=dueNow.filter(h=>h.category===c);if(!hs.length)return '';const n=hs.filter(h=>done(h.id,k)).length,p=Math.round(n/hs.length*100);return `<div class="category-row"><div style="flex:1">${esc(c)}<div class="cat-track"><i style="width:${p}%"></i></div></div><span>${n}/${hs.length}</span></div>`}).join('')||'<div class="muted" style="font-size:12px">Hoy no hay hábitos programados.</div>';
+ renderChart();renderMonthStats();renderCalendar();
+ const dueNow=dueOn(now);
+ document.getElementById('categoryStats').innerHTML=CATS.map(c=>{const hs=dueNow.filter(h=>h.category===c);if(!hs.length)return '';const n=hs.filter(h=>done(h.id,k)).length,p=Math.round(n/hs.length*100);return `<div class="category-row"><div style="flex:1">${esc(c)}<div class="cat-track"><i style="width:${p}%"></i></div></div><span>${n}/${hs.length}</span></div>`}).join('')||'<div class="muted" style="font-size:12px">Hoy no hay hábitos programados.</div>';
 }
-function toast(s){let t=document.getElementById('toast');t.textContent=s;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2400)}
+function toast(s,isQuote){const t=document.getElementById('toast');t.textContent=s;t.classList.toggle('quote-t',!!isQuote);t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),isQuote?3600:2400)}
+
+/* ---------- pestañas ---------- */
+function showTab(name){
+ tab=name;
+ document.querySelectorAll('[data-tab]').forEach(s=>s.hidden=s.dataset.tab!==name);
+ document.querySelectorAll('.tab-btn').forEach(b=>{if(b.dataset.go===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+ try{localStorage.setItem(TAB_KEY,name)}catch{}
+ if(name==='ajustes')renderRemind();
+ window.scrollTo(0,0);
+}
+document.querySelector('.tabbar').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)showTab(b.dataset.go)});
 
 /* ---------- recordatorios ---------- */
 const hasNotif='Notification' in window;
@@ -256,8 +393,8 @@ async function notify(title,body,tag){
  if(hasNotif&&Notification.permission==='granted'){
   try{
    const reg=('serviceWorker' in navigator)?await navigator.serviceWorker.getRegistration():null;
-   if(reg){await reg.showNotification(title,{body,icon:'icon.svg',badge:'icon.svg',tag});return}
-   new Notification(title,{body,icon:'icon.svg',tag});return;
+   if(reg){await reg.showNotification(title,{body,icon:'icon-192.png',badge:'icon-192.png',tag});return}
+   new Notification(title,{body,icon:'icon-192.png',tag});return;
   }catch{}
  }
  toast(`${title} — ${body}`);
@@ -268,7 +405,7 @@ function checkReminders(){
  data.habits.forEach(h=>{
   if(!h.time||!scheduled(h,now)||done(h.id,k)||fired[h.id])return;
   const t=toMin(h.time);
-  if(mins>=t&&mins<t+180){fired[h.id]=1;changed=true;notify(`${h.emoji||'✦'} ${h.name}`,'Es hora de tu hábito.','h-'+h.id)}
+  if(mins>=t&&mins<t+180){fired[h.id]=1;changed=true;notify(`${h.emoji||'✦'} ${h.name}`,phraseFor(h,now),'h-'+h.id)}
  });
  if(r.daily&&!fired.daily){
   const t=toMin(r.time);
@@ -285,11 +422,9 @@ function renderRemind(){
  const st=document.getElementById('remStatus');
  st.className='status'+(on?' ok':'');
  st.textContent=perm==='unsupported'?'Este navegador no admite notificaciones.':perm==='denied'?'Las notificaciones están bloqueadas. Habilitalas en la configuración del sitio en tu navegador.':on?'Recordatorios activados.':'Recordatorios desactivados.';
- const b=document.getElementById('remEnable');b.textContent=on?'Desactivar recordatorios':'Activar recordatorios';b.disabled=perm==='unsupported'||perm==='denied';b.style.opacity=b.disabled?.5:1;
+ const b=document.getElementById('remEnable');b.textContent=on?'Desactivar recordatorios':'Activar recordatorios';b.disabled=perm==='unsupported'||perm==='denied';
  document.getElementById('remDaily').checked=!!r.daily;document.getElementById('remTime').value=r.time;
 }
-document.getElementById('remindBtn').onclick=()=>{renderRemind();document.getElementById('remindDialog').showModal()};
-document.getElementById('closeRemind').onclick=()=>document.getElementById('remindDialog').close();
 document.getElementById('remEnable').onclick=async()=>{
  const r=data.settings.remind;
  if(r.enabled&&hasNotif&&Notification.permission==='granted'){r.enabled=false;save();renderRemind();return}
@@ -298,29 +433,65 @@ document.getElementById('remEnable').onclick=async()=>{
 };
 document.getElementById('remDaily').onchange=e=>{data.settings.remind.daily=e.target.checked;save()};
 document.getElementById('remTime').onchange=e=>{if(e.target.value){data.settings.remind.time=e.target.value;save()}};
-document.getElementById('remTest').onclick=()=>notify('Habit ✦','Así se verán tus recordatorios.','test');
+document.getElementById('remTest').onclick=()=>notify('Habit',dailyPhrase(),'test');
 setInterval(checkReminders,30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();checkReminders()}});
 
 /* ---------- eventos ---------- */
-document.getElementById('filters').addEventListener('click',e=>{let b=e.target.closest('[data-filter]');if(b){filter=b.dataset.filter;render()}});
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(b){filter=b.dataset.filter;render()}});
 document.getElementById('chart').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(!b)return;const x=chartDays[Number(b.dataset.i)];chartSel=chartSel===x.k?null:x.k;renderChart()});
-document.getElementById('habitList').addEventListener('click',e=>{let c=e.target.closest('[data-check]'),ed=e.target.closest('[data-edit]');if(c){setDone(c.dataset.check)}else if(ed){let h=data.habits.find(x=>x.id===ed.dataset.edit);if(!h)return;editing=h.id;document.getElementById('dialogTitle').textContent='Editar hábito';document.getElementById('habitName').value=h.name;document.getElementById('habitCategory').value=h.category;document.getElementById('habitEmoji').value=h.emoji||'✦';document.getElementById('habitTime').value=h.time||'';let selected=Array.isArray(h.days)?h.days:[0,1,2,3,4,5,6];document.querySelectorAll('#dayPicks input').forEach(x=>x.checked=selected.includes(Number(x.value)));document.getElementById('habitDialog').showModal()}});
-function close(){document.getElementById('habitDialog').close();document.getElementById('habitForm').reset();editing=null}
-document.getElementById('addBtn').onclick=()=>{editing=null;document.getElementById('dialogTitle').textContent='Nuevo hábito';document.getElementById('habitForm').reset();document.querySelectorAll('#dayPicks input').forEach(x=>x.checked=true);document.getElementById('habitDialog').showModal()};
-document.getElementById('closeDialog').onclick=close;document.getElementById('cancelBtn').onclick=close;
-document.getElementById('prevMonth').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()-1);renderCalendar()};
-document.getElementById('nextMonth').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()+1);renderCalendar()};
-document.getElementById('habitForm').onsubmit=e=>{e.preventDefault();let name=document.getElementById('habitName').value.trim();if(!name)return;let category=document.getElementById('habitCategory').value,emoji=document.getElementById('habitEmoji').value.trim()||'✦',time=document.getElementById('habitTime').value,days=[...document.querySelectorAll('#dayPicks input:checked')].map(x=>Number(x.value));if(!days.length){toast('Elegí al menos un día');return}
- if(editing){let h=data.habits.find(x=>x.id===editing);Object.assign(h,{name,category,emoji,days});if(time)h.time=time;else delete h.time}else{const h={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,category,emoji,days};if(time)h.time=time;data.habits.push(h)}
- save();close();render();toast(time&&!data.settings.remind.enabled?'Hábito guardado. Activá los recordatorios para recibir el aviso.':'Hábito guardado')};
-const backupDialog=document.getElementById('backupDialog');
-document.getElementById('backupBtn').onclick=()=>backupDialog.showModal();
-document.getElementById('closeBackup').onclick=()=>backupDialog.close();
-document.getElementById('exportBtn').onclick=()=>{const payload={app:'Habit',version:2,exportedAt:new Date().toISOString(),data};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`habit-backup-${dateKey()}.json`;a.click();URL.revokeObjectURL(url);toast('Copia exportada')};
+document.getElementById('dayList').addEventListener('click',e=>{const c=e.target.closest('[data-dcheck]');if(c&&!c.disabled)toggle(c.dataset.dcheck,selectedDate)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-month]');if(!b)return;viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+Number(b.dataset.month),1);renderMonthStats();renderCalendar()});
+const dlg=document.getElementById('habitDialog'),delBtn=document.getElementById('deleteBtn');
+function resetDelete(){clearTimeout(resetDelete.t);delBtn.textContent='Eliminar';delBtn.dataset.armed=''}
+document.getElementById('habitList').addEventListener('click',e=>{
+ const c=e.target.closest('[data-check]'),ed=e.target.closest('[data-edit]');
+ if(c){toggle(c.dataset.check,dateKey())}
+ else if(ed){
+  const h=data.habits.find(x=>x.id===ed.dataset.edit);if(!h)return;
+  editing=h.id;resetDelete();delBtn.hidden=false;
+  document.getElementById('dialogTitle').textContent='Editar hábito';
+  document.getElementById('habitName').value=h.name;document.getElementById('habitCategory').value=h.category;document.getElementById('habitEmoji').value=h.emoji||'✦';
+  document.getElementById('habitTime').value=h.time||'';document.getElementById('habitPhrase').value=h.phrase||'';
+  const selected=Array.isArray(h.days)?h.days:[0,1,2,3,4,5,6];
+  document.querySelectorAll('#dayPicks input').forEach(x=>x.checked=selected.includes(Number(x.value)));
+  dlg.showModal();
+ }
+});
+function closeDlg(){dlg.close();document.getElementById('habitForm').reset();editing=null;resetDelete()}
+document.getElementById('addBtn').onclick=()=>{editing=null;resetDelete();delBtn.hidden=true;document.getElementById('dialogTitle').textContent='Nuevo hábito';document.getElementById('habitForm').reset();document.querySelectorAll('#dayPicks input').forEach(x=>x.checked=true);dlg.showModal()};
+document.getElementById('closeDialog').onclick=closeDlg;document.getElementById('cancelBtn').onclick=closeDlg;
+// Eliminar con doble toque (los cuadros de confirmación del navegador no funcionan en todos lados).
+delBtn.onclick=()=>{
+ if(delBtn.dataset.armed!=='1'){delBtn.dataset.armed='1';delBtn.textContent='¿Seguro? Tocá otra vez';resetDelete.t=setTimeout(resetDelete,3500);return}
+ const id=editing;data.habits=data.habits.filter(h=>h.id!==id);save();closeDlg();render();toast('Hábito eliminado');
+};
+document.getElementById('habitForm').onsubmit=e=>{
+ e.preventDefault();
+ const name=document.getElementById('habitName').value.trim();if(!name)return;
+ const category=document.getElementById('habitCategory').value,emoji=document.getElementById('habitEmoji').value.trim()||'✦',time=document.getElementById('habitTime').value,phrase=document.getElementById('habitPhrase').value.trim();
+ const days=[...document.querySelectorAll('#dayPicks input:checked')].map(x=>Number(x.value));
+ if(!days.length){toast('Elegí al menos un día');return}
+ if(editing){const h=data.habits.find(x=>x.id===editing);Object.assign(h,{name,category,emoji,days});if(time)h.time=time;else delete h.time;if(phrase)h.phrase=phrase;else delete h.phrase}
+ else{const h={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,category,emoji,days,start:dateKey()};if(time)h.time=time;if(phrase)h.phrase=phrase;data.habits.push(h)}
+ save();closeDlg();render();toast(time&&!data.settings.remind.enabled?'Hábito guardado. Activá los recordatorios en Ajustes.':'Hábito guardado');
+};
+document.getElementById('exportBtn').onclick=()=>{const payload={app:'Habit',version:3,exportedAt:new Date().toISOString(),data};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`habit-backup-${dateKey()}.json`;a.click();URL.revokeObjectURL(url);toast('Copia exportada')};
 document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
-document.getElementById('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());const incoming=parsed.data||parsed;if(!incoming||!Array.isArray(incoming.habits)||typeof incoming.logs!=='object'||!incoming.logs)throw new Error('Formato inválido');if(!confirm('Esto reemplazará los hábitos y registros actuales. ¿Querés continuar?'))return;data={habits:incoming.habits,logs:incoming.logs,settings:normSettings(incoming.settings||data.settings)};save();render();backupDialog.close();toast('Copia restaurada')}catch(err){alert('No se pudo importar la copia. Verificá que sea un archivo de Habit válido.')}finally{e.target.value=''}};
+document.getElementById('importFile').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  const parsed=JSON.parse(await file.text());const incoming=normData(parsed.data||parsed);
+  if(!incoming)throw new Error('Formato inválido');
+  if(!confirm('Esto reemplazará los hábitos y registros actuales. ¿Querés continuar?'))return;
+  data={habits:incoming.habits,logs:incoming.logs,settings:normSettings(incoming.settings||data.settings)};save();render();toast('Copia restaurada');
+ }catch(err){alert('No se pudo importar la copia. Verificá que sea un archivo de Habit válido.')}
+ finally{e.target.value=''}
+};
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
-render();checkReminders();
+let startTab='hoy';try{startTab=localStorage.getItem(TAB_KEY)||'hoy'}catch{}
+if(!['hoy','progreso','calendario','ajustes'].includes(startTab))startTab='hoy';
+save();render();showTab(startTab);checkReminders();
 </script>
-</body></html>
+</body>
+</html>
